@@ -1,3 +1,21 @@
 # homework
 project1-6
 这个仓库包含了吕景彦和邱德民的6个project
+project4:
+4.a.1是原始版本，未进行任何优化。只是实现了sm3算法
+4.a.2是循环展开 + 宏的第一版优化。速度提升约28%，单核吞吐由8.2cy/B提升到5.9cy/B
+4.a.3是消息扩展提前计算优化，速度提升13%。5.9->5.1
+4.a.4是最终优化版本，使用了内存对齐，批处理，动态选择等方式，在原基础上再次优化，1.9，接近了公开文献的速度。
+4.b 已完成新增：在同一 .cpp 文件尾部加入 长度扩展攻击演示主函数,辅助函数：sm3_padding()、sm3_hash()、十六进制编解码
+4.c 构建：10 万个叶子结点 sm3("leaf#i")，两两拼接构建父节点。
+存在性证明：对指定叶节点生成“哈希路径”，逐层合成至根。
+非存在性验证：构造不存在元素的哈希，尝试用已有路径伪造根哈希，结果应失败。
+
+project5:
+5.a.1使用python完成了sm2的基本实现，未进行优化
+5.a.2对上面代码进行优化，重复 ID 的 Z 值计算已缓存，所有椭圆点统一用 P.x / P.y 传参
+5.b完成任务 b 的第一个误用场景 PoC：重用 k 导致私钥泄露
+5.c成功伪造了“中本聪”的 SM2 签名
+
+project6:
+基于 NIST P‑256 与 Paillier 的 DDH 私密交集求和（Private Intersection‑Sum）原型，实现自 ePrint 2019/723 Figure 2 的三轮流程，为 Google Password Checkup 提供算法底座；克隆后执行 python -m pip install tinyec phe cryptography && python psi_sum_ddh.py，即可在终端直观看到“交集规模＋密文聚合”输出
